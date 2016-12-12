@@ -1,0 +1,99 @@
+<link rel="import" href="../polymer/polymer.html">
+
+<!--
+
+Provide interface to Hotplate.cometClient
+
+It's kind of a hack, but it works.
+
+@demo demo/index.html
+-->
+
+<script>
+
+Hotplate.HotWsBehavior = {
+
+  properties: {
+
+    wsData: {
+      type: Object,
+      value: Hotplate.cometClient.data,
+      readOnly: true,
+    },
+
+    wsMethods: {
+      type: Object,
+      value: Hotplate.cometClient,
+      readOnly: true,
+    },
+
+
+    wsUrl: {
+      type: String,
+      observer: "_wsUrlChanged",
+    },
+
+    wsReopenDelay: {
+      type: String,
+      observer: "_wsReopenDelayChanged",
+    },
+
+    wsResendDelay: {
+      type: String,
+      observer: "_wsResendDelayChanged",
+    },
+
+    wsAutoOpen: {
+      type: Boolean,
+      observer: "_wsAutoOpenChanged",
+      default: false,
+    }
+
+  },
+
+
+  /* These are to set the object */
+  _wsUrlChanged: function( url ){
+    this.set('wsData.url', url );
+  },
+
+  _wsReopenDelayChanged: function( delay ){
+    this.set('wsData.reopenDelay', delay );
+  },
+
+  _wsResendtDelayChanged: function( delay ){
+    this.set('wsData.resendDelay', delay );
+  },
+
+
+  /* An actual, proper Polymer property! */
+  _wsAutoOpenChanged: function( autoOpen ){
+    if( autoOpen) this.wsMethods.open()
+  },
+
+  // Function to be overridden by element to receive messages
+  wsMessage: function( message ){
+  },
+
+
+  /* Methods wrapping */
+
+  wsSendLocal: function( message ){
+    this.wsMethods.sendLocal( message );
+  },
+
+  wsSendWs: function( message ){
+    this.wsMethods.sendWs( message );
+  },
+
+  /* Adding element that implements the behaviour to the list of subscrinbers automatically*/
+
+  attached: function() {
+    this.wsMethods.addSubscriber( this );
+  },
+  detached: function() {
+    this.wsMethods.deleteSubscriber( this );
+  },
+};
+
+</script>
