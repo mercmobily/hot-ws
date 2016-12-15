@@ -1,7 +1,7 @@
 {
-  "name": "hot-ws-behavior",
-  "description": "Behaviour ",
-  "main": "hot-ws-behavior.html",
+  "name": "hot-ws",
+  "description": "Behavior and widget to use hotplate's comet-client",
+  "main": "hot-ws-open.html",
   "dependencies": {
     "polymer": "Polymer/polymer#^1.6.0",
     "hot-deep-target-behavior": "^0.2.0"

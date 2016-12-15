@@ -2,31 +2,23 @@
 
 <html>
   <head>
-    <title>hot-ws-behavior test</title>
+    <title>hot-ws test</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, minimum-scale=1.0, initial-scale=1, user-scalable=yes">
     <script src="../../webcomponentsjs/webcomponents-lite.js"></script>
     <script src="../../web-component-tester/browser.js"></script>
 
-    <link rel="import" href="../hot-ws-behavior.html">
+    <link rel="import" href="../hot-ws-open.html">
   </head>
   <body>
 
     <test-fixture id="basic">
       <template>
-        <hot-ws-behavior></hot-ws-behavior>
+        <hot-ws-open></hot-ws-open>
       </template>
     </test-fixture>
 
     <script>
-      suite('hot-ws-behavior', function() {
-
-        test('instantiating the element works', function() {
-          var element = fixture('basic');
-          assert.equal(element.is, 'hot-ws-behavior');
-        });
-
-      });
     </script>
   </body>
 </html>

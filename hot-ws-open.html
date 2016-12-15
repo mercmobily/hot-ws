@@ -1,0 +1,43 @@
+<link rel="import" href="../polymer/polymer.html">
+
+<!--
+
+
+
+@demo demo/index.html
+-->
+
+<dom-module id="hot-ws-open">
+  <template>
+  </template>
+
+  <script>
+    Polymer({
+      is: 'hot-ws-open',
+
+      properties: {
+
+        url: {
+          type: String,
+        },
+
+        reopenDelay: {
+          type: String,
+        },
+
+        resendDelay: {
+          type: String,
+        },
+
+      },
+
+      attached: function(){
+        Hotplate.cometClient.data.url = this.url;
+        Hotplate.cometClient.data.reopenDelay = this.reopenDelay;
+        Hotplate.cometClient.data.resendDelay = this.reopenDelay;
+        Hotplate.cometClient.open();
+      }
+
+    })
+  </script>
+</dom-module>

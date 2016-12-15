@@ -2,15 +2,11 @@
 
 <!--
 
-Provide interface to Hotplate.cometClient
-
-It's kind of a hack, but it works.
-
-@demo demo/index.html
 -->
 
 <script>
 
+if( typeof Hotplate == 'undefined' ) Hotplate = {};
 Hotplate.HotWsBehavior = {
 
   properties: {
@@ -26,55 +22,12 @@ Hotplate.HotWsBehavior = {
       value: Hotplate.cometClient,
       readOnly: true,
     },
-
-
-    wsUrl: {
-      type: String,
-      observer: "_wsUrlChanged",
-    },
-
-    wsReopenDelay: {
-      type: String,
-      observer: "_wsReopenDelayChanged",
-    },
-
-    wsResendDelay: {
-      type: String,
-      observer: "_wsResendDelayChanged",
-    },
-
-    wsAutoOpen: {
-      type: Boolean,
-      observer: "_wsAutoOpenChanged",
-      default: false,
-    }
-
   },
 
-
-  /* These are to set the object */
-  _wsUrlChanged: function( url ){
-    this.set('wsData.url', url );
-  },
-
-  _wsReopenDelayChanged: function( delay ){
-    this.set('wsData.reopenDelay', delay );
-  },
-
-  _wsResendtDelayChanged: function( delay ){
-    this.set('wsData.resendDelay', delay );
-  },
-
-
-  /* An actual, proper Polymer property! */
-  _wsAutoOpenChanged: function( autoOpen ){
-    if( autoOpen) this.wsMethods.open()
-  },
 
   // Function to be overridden by element to receive messages
   wsMessage: function( message ){
   },
-
 
   /* Methods wrapping */
 
