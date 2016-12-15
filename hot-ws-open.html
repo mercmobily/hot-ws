@@ -2,7 +2,7 @@
 
 <!--
 
-
+Small element that opens a websocket using Hotplate's cometClient
 
 @demo demo/index.html
 -->
@@ -29,12 +29,18 @@
           type: String,
         },
 
+        pingInterval: {
+          type: String
+        }
+
       },
 
       attached: function(){
         Hotplate.cometClient.data.url = this.url;
         Hotplate.cometClient.data.reopenDelay = this.reopenDelay;
         Hotplate.cometClient.data.resendDelay = this.reopenDelay;
+        Hotplate.cometClient.data.pingInterval = this.pingInterval;
+
         Hotplate.cometClient.open();
       }
 

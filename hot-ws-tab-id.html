@@ -1,0 +1,30 @@
+<link rel="import" href="../polymer/polymer.html">
+<link rel="import" href="/bower_components/iron-input/iron-input.html">
+<!--
+
+
+@demo demo/index.html
+-->
+
+<dom-module id="hot-ws-tab-id">
+  <template>
+    <input is="iron-input" type="hidden" name="fromTabId" value="{{tabId}}">
+  </template>
+
+  <script>
+    Polymer({
+      is: 'hot-ws-tab-id',
+
+      properties: {
+        tabId: {
+          type: String
+        }
+      },
+
+      attached: function(){
+        this.tabId = Hotplate.cometClient.data.tabId;
+      }
+
+    })
+  </script>
+</dom-module>
