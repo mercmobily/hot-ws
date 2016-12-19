@@ -25,8 +25,20 @@ Hotplate.HotWsBehavior = {
       value: Hotplate.cometClient,
       readOnly: true,
     },
+
+    ajaxElementId: {
+      type: String
+    },
+
   },
 
+
+  wsReset: function(){
+    var aj = this.$[ this.ajaxElementId ];
+    if( aj ){
+      aj.generateRequest();
+    }
+  },
 
   // Function to be overridden by element to receive messages
   wsMessage: function( message ){
@@ -35,11 +47,11 @@ Hotplate.HotWsBehavior = {
   /* Methods wrapping */
 
   wsSendLocal: function( message ){
-    this.wsMethods.sendLocal( message );
+    if( this.wsMethods ) this.wsMethods.sendLocal( message );
   },
 
   wsSendWs: function( message ){
-    this.wsMethods.sendWs( message );
+    if( this.wsMethods ) this.wsMethods.sendWs( message );
   },
 
   /* Adding element that implements the behaviour to the list of subscrinbers automatically*/
@@ -50,6 +62,8 @@ Hotplate.HotWsBehavior = {
   detached: function() {
     this.wsMethods.deleteSubscriber( this );
   },
+
+
 };
 
 </script>
