@@ -32,12 +32,20 @@ Hotplate.HotWsBehavior = {
 
   },
 
-
   wsReset: function(){
+    if( ! this.ajaxElementId ) return;
     var aj = this.$[ this.ajaxElementId ];
     if( aj ){
       aj.generateRequest();
     }
+  },
+
+  wsOpen: function(){
+    Hotplate.cometClient.open();
+  },
+
+  wsClose: function(){
+    Hotplate.cometClient.close();
   },
 
   // Function to be overridden by element to receive messages
