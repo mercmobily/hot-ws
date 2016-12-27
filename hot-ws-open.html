@@ -36,12 +36,13 @@ Small element that opens a websocket using Hotplate's cometClient
       },
 
       attached: function(){
-        Hotplate.cometClient.data.url = this.url;
-        Hotplate.cometClient.data.reopenDelay = this.reopenDelay;
-        Hotplate.cometClient.data.resendDelay = this.reopenDelay;
-        Hotplate.cometClient.data.pingInterval = this.pingInterval;
-
-        Hotplate.cometClient.open();
+        setTimeout( function(){
+          Hotplate.cometClient.data.url = this.url;
+          Hotplate.cometClient.data.reopenDelay = this.reopenDelay;
+          Hotplate.cometClient.data.resendDelay = this.reopenDelay;
+          Hotplate.cometClient.data.pingInterval = this.pingInterval;
+          Hotplate.cometClient.open();
+        }.bind( this ),1000 );
       }
 
     })
