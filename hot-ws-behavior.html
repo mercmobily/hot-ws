@@ -10,6 +10,7 @@ Small behaviour for Polymer elements that will ensure that they are registered f
 <script>
 
 if( typeof Hotplate == 'undefined' ) Hotplate = {};
+
 Hotplate.HotWsBehavior = {
 
   properties: {
@@ -62,15 +63,37 @@ Hotplate.HotWsBehavior = {
     if( this.wsMethods ) this.wsMethods.sendWs( message );
   },
 
-  /* Adding element that implements the behaviour to the list of subscrinbers automatically*/
 
   attached: function() {
     this.wsMethods.addSubscriber( this );
+    this._actionWsSubscriptions('subscribe');
+
   },
   detached: function() {
     this.wsMethods.deleteSubscriber( this );
+    this._actionWsSubscriptions('unsubscribe');
   },
 
+  _actionWsSubscriptions: function( action ){
+
+    if( ! this.wsSubscriptions ){
+      return;
+    }
+
+    var subscriptions = this.wsSubscriptions();
+    var that = this;
+
+    subscriptions.forEach( function( sub ){
+      var $s = {
+        type: action,
+        handle: sub.handle
+      };
+      [ 'p1', 'p2', 'p3', 'p4' ].forEach( function( pKey ){
+        if( sub[ pKey ] ) $s[ pKey ] = sub[ pKey ];
+      });
+      that.wsSendWs( $s );
+    });
+  },
 
 };
 
