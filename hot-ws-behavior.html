@@ -27,18 +27,25 @@ Hotplate.HotWsBehavior = {
       readOnly: true,
     },
 
+/*
     ajaxElementId: {
       type: String
     },
+*/
 
   },
 
+  // A 'reset' will trigger 'refresh' in live elements
   wsReset: function(){
+    if( this.refresh) this.refresh();
+
+    /*
     if( ! this.ajaxElementId ) return;
     var aj = this.$[ this.ajaxElementId ];
     if( aj ){
       aj.generateRequest();
     }
+    */
   },
 
   wsOpen: function(){
